@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
         String email ="phamhoaithanh32@gmail.com";
         String pass = "Lumia520";
 
+
+        
         ILoginPresenter iLoginPresenter = new LoginPersenter(this);
         iLoginPresenter.onLogin(email, pass);
 
