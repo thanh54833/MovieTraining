@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
         String pass = "Lumia520";
 
 
-        
         ILoginPresenter iLoginPresenter = new LoginPersenter(this);
         iLoginPresenter.onLogin(email, pass);
 
