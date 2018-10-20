@@ -1,6 +1,8 @@
 package com.example.thanh.movietraining.model;
 
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 
 
 import com.example.thanh.movietraining.BuildConfig;
@@ -46,20 +48,18 @@ public class User implements IUser {
                                     "google_id :" + login.data.getGoogle_id() + "\n" + "access_token :" + login.data.getAccess_token() + "\n" + "created_at :" + login.data.getCreated_at() + "\n" +
                                     "updated_at :" + login.data.getUpdated_at() + "\n"); }
 
-                        /*if(TextUtils.isEmpty(getEmail())){
+                        if(TextUtils.isEmpty(email)){
                             iLoginPresenter.getMessageError("email empty...");
                         }
-                        else if(!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()){
+                        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                             iLoginPresenter.getMessageError("email no patterns...");
-                        }else if(getPassword().length()<=6){
+                        }else if(password       .length()<=6){
                             iLoginPresenter.getMessageError("password false..");
                         }
                         else {
                             iLoginPresenter.getDataSuccess(login);
-                        }*/
-
-                        iLoginPresenter.getDataSuccess(login);
-
+                        }
+                        //iLoginPresenter.getDataSuccess(login);
                     }
                     else {
                         iLoginPresenter.getMessageError("login fail...");

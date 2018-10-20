@@ -15,18 +15,21 @@ import retrofit2.http.POST;
  */
 
 public interface APIInterface {
-    /*@GET("/api/unknown")
-    Call<MultipleResource> doGetListResources();
-    */
 
     @FormUrlEncoded
     @POST("/user/login")
     Call<Logins> onLogin(@Header("app_token") String authKey, @Field("email") String email, @Field("password") String password);//,@Body Datas data);
 
+    @FormUrlEncoded
+    @POST("/movie/list ")
+    Call<Logins> onListView(@Header("app_token") String authKey, @Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
+
 
 
     /*
-   @GET("/api/users?")
+    @GET("/api/unknown")
+    Call<MultipleResource> doGetListResources();
+    @GET("/api/users?")
     Call<UserList> doGetUserList(@Query("page") String page);
     @FormUrlEncoded
     @POST("/api/users?")
@@ -38,13 +41,8 @@ public interface APIInterface {
     //@Headers("app_token: dCuW7UQMbdvpcBDfzolAOSGFIcAec11a")
     //@Header("app_token") String authKey
     ///@Headers("Content-Type: application/json")
-
     //@POST("/user/login")
     //Call<Login> onLogin(@Header("app_token") String authKey,@Query("email") String email, @Query("password")  String password);
-
     //@POST("/user/login")
     //Call<Login> onLogin(@Header("app_token") String authKey,@Body String body);
-
-
-
 }
