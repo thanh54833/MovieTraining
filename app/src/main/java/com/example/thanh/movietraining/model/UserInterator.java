@@ -7,6 +7,7 @@ import android.util.Patterns;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.presenter.ILoadListener;
 import com.example.thanh.movietraining.retrofix.model.Logins;
+import com.example.thanh.movietraining.retrofix.model.Movies;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
 
@@ -38,33 +39,65 @@ public class UserInterator {
     }
 
     public void LoadListView(){
-        ArrayList<Movie> list = new ArrayList<>();
 
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        final Call<Logins> call = apiInterface.onListView("dCuW7UQMbdvpcBDfzolAOSGFIcAec11a",page,per_page);
+        final Call<Movies> call = apiInterface.onListView("dCuW7UQMbdvpcBDfzolAOSGFIcAec11a",page,per_page);
 
-        call.enqueue(new Callback<Logins>() {
+        call.enqueue(new Callback<Movies>() {
             @Override
-            public void onResponse(Call<Logins> call, Response<Logins> response) {
+            public void onResponse(Call<Movies> call, Response<Movies> response) {
                 if(response.isSuccessful()){
 
-                    Log.d(Tag,"result : \n true");
+                    Movies movies=response.body();
+                    ArrayList<Movie> list = new ArrayList<>();
+
+                    for(Movies.Data data:movies.getData()){
+
+                        String title=data.getTitle();
+                        String movie = null;
+                        String name=null;
+                        String decription=data.getDescription();
+
+
+                        if(decription.length()>250){
+                            decription=decription.substring(0,250)+"...";
+                        }
+
+                        if(title.indexOf("/")>0){
+                            movie=title.substring(0,title.indexOf("/"));
+                            name=title.substring(title.indexOf("/")+1,title.length());
+                        }
+                        else {
+                            movie=title;
+                            name=title;
+                        }
+                        Log.d("thanh.result","result : \n movie :"+movie+"\n name :"+name);
+
+                        Movie movieItem=new Movie(movie.trim(),name.trim(),"Lượt xem : "+data.getViews(),data.getImage(),decription.trim(),false);
+                        list.add(movieItem);
+                    }
+                    if(BuildConfig.DEBUG){
+                        Log.d(Tag,"result : "+movies.getData().length);
+                    }
+
+                    loadListener.loadSuccess(list);
 
                 }
             }
 
+
             @Override
-            public void onFailure(Call<Logins> call, Throwable t) {
+            public void onFailure(Call<Movies> call, Throwable t) {
                 if (BuildConfig.DEBUG) {
                     Log.d(Tag, "exception :" + t.getMessage());
                 }
                 call.cancel();
             }
+
+
         });
 
 
-
-        loadListener.loadSuccess(list);
     }
 
 

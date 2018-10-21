@@ -9,7 +9,7 @@ public class Movie {
     private String description;
     private boolean like;
 
-    public Movie(String movie, String name, String view, String url, String description, boolean like) {
+    public Movie(String movie, String name, String view, String url, String description,boolean like) {
         this.movie = movie;
         this.name = name;
         this.view = view;

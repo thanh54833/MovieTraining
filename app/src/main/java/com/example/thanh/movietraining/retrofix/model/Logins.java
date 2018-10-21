@@ -46,12 +46,6 @@ public class Logins {
         this.code = code;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [message = "+message+", error = "+error+", data = "+data+", code = "+code+"]";
-    }
-
     public class Datas {
         @SerializedName("id")
         @Expose
@@ -181,11 +175,7 @@ public class Logins {
             this.full_name = full_name;
         }
 
-        @Override
-        public String toString()
-        {
-            return "ClassPojo [id = "+id+", birthday = "+birthday+", updated_at = "+updated_at+", email = "+email+", created_at = "+created_at+", google_id = "+google_id+", gender = "+gender+", facebook_id = "+facebook_id+", password = "+password+", access_token = "+access_token+", full_name = "+full_name+"]";
-        }
+
     }
 
 

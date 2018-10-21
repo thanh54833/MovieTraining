@@ -3,6 +3,7 @@ package com.example.thanh.movietraining.retrofix.service;
 
 import com.example.thanh.movietraining.model.User;
 import com.example.thanh.movietraining.retrofix.model.Logins;
+import com.example.thanh.movietraining.retrofix.model.Movies;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -22,7 +23,7 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("/movie/list ")
-    Call<Logins> onListView(@Header("app_token") String authKey, @Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
+    Call<Movies> onListView(@Header("app_token") String authKey, @Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
 
 
 

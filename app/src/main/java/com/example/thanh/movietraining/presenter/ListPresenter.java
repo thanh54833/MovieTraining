@@ -23,7 +23,8 @@ public class ListPresenter implements ILoadListener {
 
     public void loadData(String page,String per_page){
         userInterator = new UserInterator(page,per_page,this);
-        userInterator.createListData();
+        //userInterator.createListData();
+        userInterator.LoadListView();
     }
 
     @Override
