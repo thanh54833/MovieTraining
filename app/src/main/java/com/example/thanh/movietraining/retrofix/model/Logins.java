@@ -46,7 +46,17 @@ public class Logins {
         this.code = code;
     }
 
-    public class Datas {
+    public Logins() {
+        }
+
+    public Logins(String message, String error, Datas data, String code) {
+        this.message = message;
+        this.error = error;
+        this.data = data;
+        this.code = code;
+    }
+
+    public static class Datas {
         @SerializedName("id")
         @Expose
         private String id;
@@ -81,6 +91,24 @@ public class Logins {
         @Expose
         private String full_name;
 
+        public Datas(String id, String birthday, String updated_at, String email, String created_at, String google_id, String gender, String facebook_id, String password, String access_token, String full_name) {
+            this.id = id;
+            this.birthday = birthday;
+            this.updated_at = updated_at;
+            this.email = email;
+            this.created_at = created_at;
+            this.google_id = google_id;
+            this.gender = gender;
+            this.facebook_id = facebook_id;
+            this.password = password;
+            this.access_token = access_token;
+            this.full_name = full_name;
+        }
+
+
+        public Datas() {
+
+        }
 
         public Datas(String email, String password) {
             this.email = email;

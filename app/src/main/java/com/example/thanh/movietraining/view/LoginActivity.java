@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
+import com.example.thanh.movietraining.Sqlite.DBManager;
 import com.example.thanh.movietraining.presenter.ILoginPresenter;
 import com.example.thanh.movietraining.presenter.LoginPersenter;
 import com.example.thanh.movietraining.retrofix.model.Logins;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
     private Button buttonForgotPassword;
     private Button buttonSignIn;
     private TextView textViewLogin;
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +54,16 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
         buttonSignIn.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
+        dbManager = new DBManager(this);
 
     }
 
     @Override
     public void getDataSuccess(Logins logins) {
+        dbManager.addAccount(logins);
         if (BuildConfig.DEBUG) {
-            Toast.makeText(this, "Login success : \n get email : " + logins.data.getEmail() + "\nget name:" + logins.data.getFull_name(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login success : \n name :" +dbManager.getAccount().data.getEmail(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -78,7 +81,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
                     Toast.makeText(this, "Click button Login ...", Toast.LENGTH_SHORT).show();
 
                     onLogin();
-
                 }
                 break;
         }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
+import com.example.thanh.movietraining.Sqlite.DBManager;
 import com.example.thanh.movietraining.adapter.CustomListMovie;
 import com.example.thanh.movietraining.model.Movie;
 import com.example.thanh.movietraining.presenter.ListPresenter;
@@ -31,6 +32,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
     private static int PAGE = 1;
     private static int TOTAL_PAGE;
     private static ArrayList<Movie> movies;
+
 
 
     @Override
@@ -56,7 +58,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                /*if (!listView.canScrollVertically(1) && scrollState == SCROLL_STATE_IDLE && TOTAL_PAGE == 10) {
+                if (!listView.canScrollVertically(1) && scrollState == SCROLL_STATE_IDLE && TOTAL_PAGE == 10) {
                     PAGE = PAGE + 1;
                     mainPresenter.loadData(String.valueOf(PAGE), "10");
                     if (BuildConfig.DEBUG) {
@@ -69,7 +71,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
                     if (BuildConfig.DEBUG) {
                         Log.d("thanhthanh", "top :" + PAGE);
                     }
-                }*/
+                }
 
             }
             @Override
