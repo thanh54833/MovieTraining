@@ -21,7 +21,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
     private ListView listView;
     private ListPresenter mainPresenter;
     private static CustomListMovie adapter;
-    private static int PAGE = 1;
+    private static int PAGE = 1;//1
     private static int TOTAL_PAGE;
     private static ArrayList<Movie> movies;
 
@@ -57,7 +57,8 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
                         Log.d("thanhthanh", "bottom :" + PAGE);
                     }
                 }
-                if (!listView.canScrollVertically(-1) && scrollState == SCROLL_STATE_IDLE && PAGE > 1) {
+
+                if (!listView.canScrollVertically(-1) && scrollState == SCROLL_STATE_IDLE &&PAGE>1) {
                     PAGE = PAGE - 1;
                     mainPresenter.loadData(String.valueOf(PAGE), "10");
                     if (BuildConfig.DEBUG) {

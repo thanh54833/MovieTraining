@@ -1,5 +1,6 @@
 package com.example.thanh.movietraining.view;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
     private EditText edt_password;
     private EditText edt_forgot_password;
     private Button btn_register;
+    private Button btn_sd;
+    private Button btn_dm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
         edt_email=findViewById(R.id.edt_email);
         edt_password=findViewById(R.id.edt_password);
         edt_forgot_password=findViewById(R.id.edt_forgot_password_);
-
+        btn_sd=findViewById(R.id.btn_sd);
+        btn_dm=findViewById(R.id.btn_bm);
+        btn_sd.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        btn_dm.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         btn_register=findViewById(R.id.btn_register);
         btn_register.setOnClickListener(this);
     }
@@ -60,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
     @Override
     public void getMessageError(String e) {
         if (BuildConfig.DEBUG) {
-            Toast.makeText(this, "Register error : true ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Register error : false ", Toast.LENGTH_SHORT).show();
             Log.d("thanhthanh","result : Register error");
         }
     }

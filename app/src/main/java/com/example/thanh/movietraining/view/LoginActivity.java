@@ -1,5 +1,6 @@
 package com.example.thanh.movietraining.view;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -25,9 +26,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     private EditText editTextPassword;
     private Button buttonLogin;
     private Button buttonForgotPassword;
-    private Button buttonSignIn;
     private TextView textViewLogin;
     private DBAcount dbManager;
+    private Button btn_register;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         editTextPassword = findViewById(R.id.edt_password);
         buttonLogin = findViewById(R.id.btn_login);
         buttonForgotPassword = findViewById(R.id.btn_forgot_password);
-        buttonSignIn = findViewById(R.id.btn_signin);
+        btn_register = findViewById(R.id.btn_register);
+        btn_register.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         textViewLogin=findViewById(R.id.tv_login);
         buttonLogin.setOnClickListener(this);
         buttonForgotPassword.setOnClickListener(this);
-        buttonSignIn.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
         dbManager = new DBAcount(this);
@@ -82,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                     onLogin();
                 }
                 break;
+
         }
 
     }
@@ -92,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (i) {
                 case KeyEvent.KEYCODE_DPAD_CENTER:
+
                 case KeyEvent.KEYCODE_ENTER:
                     switch (view.getId()) {
                         case R.id.edt_email:
@@ -121,6 +125,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                             break;
                     }
                     return true;
+
+
                 default:
                     break;
             }

@@ -66,16 +66,12 @@ public class DBLike extends SQLiteOpenHelper {
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         ArrayList<String> arrayList=new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-
                 arrayList.add (cursor.getString(0));
-
             } while (cursor.moveToNext());
         }
-
         db.close();
         return arrayList;
     }
