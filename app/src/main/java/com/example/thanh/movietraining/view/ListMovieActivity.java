@@ -55,48 +55,52 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
 
     @Override
     protected void onDestroy() {
-        if(BuildConfig.DEBUG){
-            Toast.makeText(getApplicationContext(),"detroy :"+integers,Toast.LENGTH_SHORT).show();
+        if (BuildConfig.DEBUG) {
+            Toast.makeText(getApplicationContext(), "detroy :" + integers, Toast.LENGTH_SHORT).show();
         }
         recoderArrayLike();
         super.onDestroy();
     }
 
-    public void recoderArrayLike(){
-        parses=new Parses();
-        for(int interger:integers){
+    public void recoderArrayLike() {
+        parses = new Parses();
+        for (int interger : integers) {
             parses.add(parses.getByte(interger));
         }
         parses.Close();
+        try{
+            Files.wirteFile(FILE_DATABASE, parses.getBuffer());
+        }catch (Exception e){
+            Log.d("clicklike", "result :" + e.getMessage());
+        }
 
-        Log.d("clicklike","result :"+Files.wirteFile(FILE_DATABASE,parses.getBuffer()));
+
     }
 
     @Override
     protected void onStop() {
-        if(BuildConfig.DEBUG){
-            Toast.makeText(getApplicationContext(),"stop",Toast.LENGTH_SHORT).show();
+        if (BuildConfig.DEBUG) {
+            Toast.makeText(getApplicationContext(), "stop", Toast.LENGTH_SHORT).show();
         }
         super.onStop();
     }
 
     private void init() {
 
-        integers=new ArrayList<>();
+        integers = new ArrayList<>();
 
         byte[] buffer = Files.readFile(FILE_DATABASE);
-        if(buffer!=null){
-            converter=new Converter(buffer);
+        if (buffer != null) {
+            converter = new Converter(buffer);
             do {
                 integers.add(converter.byteToInterger());
             } while (converter.getBuffer() != 0);
-        }
-        else {
-            if(BuildConfig.DEBUG){
-                Toast.makeText(getApplicationContext(),"buffer by null",Toast.LENGTH_SHORT).show();
+        } else {
+            if (BuildConfig.DEBUG) {
+                Toast.makeText(getApplicationContext(), "buffer by null", Toast.LENGTH_SHORT).show();
             }
         }
-        Toast.makeText(getApplicationContext(),"length :"+integers.size(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "length :" + integers.size(), Toast.LENGTH_SHORT).show();
 
         //parses.Close();*/
 
@@ -109,7 +113,10 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 CustomListMovie.isAnimation = true;
                 if (!listView.canScrollVertically(1) && scrollState == SCROLL_STATE_IDLE && TOTAL_PAGE == 10) {
+
                     recoderArrayLike();
+
+
                     PAGE = PAGE + 1;
                     mainPresenter.loadData(String.valueOf(PAGE), "10");
                     if (BuildConfig.DEBUG) {
@@ -118,6 +125,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
                 }
                 if (!listView.canScrollVertically(-1) && scrollState == SCROLL_STATE_IDLE && PAGE > 1) {
                     recoderArrayLike();
+
                     PAGE = PAGE - 1;
                     mainPresenter.loadData(String.valueOf(PAGE), "10");
                     if (BuildConfig.DEBUG) {
@@ -125,6 +133,7 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
                     }
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
@@ -143,19 +152,19 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
 
     }
 
-    public static   void ActionLike(int position) {
+    public static void ActionLike(int position) {
 
-        if(movies.get(position).isLike()==false){
+        if (movies.get(position).isLike() == false) {
             movies.get(position).setLike(true);
             integers.add(Integer.valueOf(movies.get(position).getId()));
-        }else {
+        } else {
             movies.get(position).setLike(false);
             integers.remove(Integer.valueOf(movies.get(position).getId()));
         }
 
         CustomListMovie.isAnimation = false;
         adapter.notifyDataSetChanged();
-        Log.d("clicklike", "result :" + position+" - add :"+integers.size()+"id :"+movies.get(position).getId());
+        Log.d("clicklike", "result :" + position + " - add :" + integers.size() + "id :" + movies.get(position).getId());
     }
 
 
