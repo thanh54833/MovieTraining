@@ -4,24 +4,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
-import com.example.thanh.movietraining.Sqlite.DBManager;
 import com.example.thanh.movietraining.adapter.CustomListMovie;
 import com.example.thanh.movietraining.model.Movie;
 import com.example.thanh.movietraining.presenter.ListPresenter;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.List;
 
 public class ListMovieActivity extends AppCompatActivity implements ListItem {
 
@@ -93,11 +85,8 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
     }
 
     public static void ActionLike(int position){
-
         movies.get(position).setLike(true);
-
         adapter.notifyDataSetChanged();
-
     }
 
 

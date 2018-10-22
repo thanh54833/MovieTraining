@@ -13,7 +13,7 @@ import com.example.thanh.movietraining.retrofix.model.Logins;
  * Created by chien on 4/8/17.
  */
 
-public class DBManager extends SQLiteOpenHelper {
+public class DBAcount extends SQLiteOpenHelper {
     private final String TAG = "DBManager";
     private static final String DATABASE_NAME = "Logins_manager";
     private static final String TABLE_NAME = "Logins";
@@ -37,7 +37,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     private Context context;
-    
+
     private String SQLQuery = "CREATE TABLE " + TABLE_NAME + " (" +
             id + " TEXT primary key, " +
             error + " TEXT, " +
@@ -54,7 +54,7 @@ public class DBManager extends SQLiteOpenHelper {
             updated_at + " TEXT, " +
             email + " TEXT)";
 
-    public DBManager(Context context) {
+    public DBAcount(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
         this.context = context;
         Log.d(TAG, "DBManager: ");

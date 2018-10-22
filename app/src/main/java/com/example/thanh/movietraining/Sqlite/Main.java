@@ -19,14 +19,14 @@ import java.util.List;
 
 public class Main extends AppCompatActivity {
 
-    private DBManager dbManager;
+    //private DBAcount dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbManager = new DBManager(this);
+        /*dbManager = new DBAcount(this);
 
         Logins.Datas  datas=new Logins.Datas("thanh","thanh","thanh","thanh","thanh","thanh","thanh","632","thanh","thanh","thanh");
         Logins log=new Logins("thanh","thanh",datas,"thanh");
@@ -34,7 +34,18 @@ public class Main extends AppCompatActivity {
         dbManager.addAccount(log);
 
         Toast.makeText(this,"total :"+dbManager.getAccount(),Toast.LENGTH_SHORT).show();
-        Log.d("thanhthanh","total:"+dbManager.getAccount().getError());
+        Log.d("thanhthanh","total:"+dbManager.getAccount().getError());*/
+
+
+        DBLike dbLike = new DBLike(this);
+
+        for (int i = 0; i <= 10; i++) {
+            dbLike.addLike("123");
+        }
+
+        Toast.makeText(this, "toat", Toast.LENGTH_SHORT).show();
+        Log.d("thanhthanh", "total :" + dbLike.getAllLike().size());
+
     }
 
 

@@ -10,7 +10,6 @@ import com.example.thanh.movietraining.presenter.ILoginPresenter;
 import com.example.thanh.movietraining.retrofix.model.Logins;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
-import com.example.thanh.movietraining.view.ILoginListenerView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +26,6 @@ public class User implements IUser {
         this.password = password;
         this.iLoginPresenter = iLoginPresenter;
     }
-
 
     @Override
     public void isValiData() {

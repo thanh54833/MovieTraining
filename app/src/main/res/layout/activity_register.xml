@@ -8,22 +8,20 @@
     android:gravity="bottom"
     android:orientation="vertical"
     tools:context="com.example.thanh.movietraining.view.LoginActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:orientation="vertical">
-
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        >
         <TextView
-            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"
-            android:fontFamily="@font/opensans"
-            android:text="Đăng Nhâp"
+            android:fontFamily="@font/open_sans_light"
+            android:text="Đăng Ký"
             android:textColor="#FFFFFF"
             android:textSize="25dp"
             android:textStyle="bold" />
@@ -40,12 +38,34 @@
             android:layout_marginRight="25dp"
             android:gravity="center"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa điền họ tên"
+                android:textColor="#90FFFFFF"
+                />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:hint="Họ Tên"
+                android:textColor="#FFFFFFFF"
+                android:textColorHint="#70FFFFFF"
+                android:textSize="18dp"
+                android:id="@+id/edt_name"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa điền Email"
+                android:textColor="#90FFFFFF"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="left"
                 android:hint="Email"
                 android:textColor="#FFFFFFFF"
@@ -53,58 +73,69 @@
                 android:textSize="18dp"
                 android:id="@+id/edt_email"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa điền mật khẩu"
+                android:textColor="#90FFFFFF"
+                />
 
             <EditText
+                android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 android:gravity="left"
-                android:hint="Mật khẩu"
+                android:hint="Mât Khẩu"
                 android:textColor="#FFFFFFFF"
                 android:textColorHint="#70FFFFFF"
                 android:textSize="18dp"
-                android:id="@+id/edt_password"
+
                 android:inputType="textPassword"
                 />
-
-            <Button
-                android:id="@+id/btn_login"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button_login"
-                android:fontFamily="@font/opensans"
-                android:gravity="center"
-                android:text="Đăng Nhâp"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="15dp" />
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa xác nhận mật khẩu"
+                android:textColor="#90FFFFFF"
+                />
 
+            <EditText
+
+                android:id="@+id/edt_forgot_password_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:hint="Xác nhận mật khẩu"
+                android:textColor="#FFFFFFFF"
+                android:textColorHint="#70FFFFFF"
+                android:textSize="18dp"
+
+                android:inputType="textPassword"
+                />
             <Button
-                android:id="@+id/btn_forgot_password"
+                android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_button_login2"
+                android:background="@drawable/bg_button_login"
+                android:fontFamily="@font/opensans"
                 android:gravity="center"
-                android:text="Quên mật khẩu ?"
+                android:text="Đăng Ký"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
-        </LinearLayout>
 
+        </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_gravity="center"
             android:background="@drawable/rectangle" />
-
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -116,24 +147,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạn chưa có tài khoản ?"
+            android:layout_gravity="bottom"
+            android:text="Bằng việc chọn vào nút Đăng ký bạn đã đồng ý với Điều khỏa sử dụng và Quy định bảo mật của HFilm "
             android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            android:layout_gravity="bottom"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:background="#00000000"
-            android:text="Đăng ký"
-            android:textColor="#f78922"
-            android:textSize="18dp"
-            android:layout_gravity="bottom"
-            android:id="@+id/btn_signin"
-            />
-
+            android:textSize="14dp"
+            android:gravity="center"/>
     </LinearLayout>
 
 

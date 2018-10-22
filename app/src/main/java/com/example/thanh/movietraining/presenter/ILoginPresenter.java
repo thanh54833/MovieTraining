@@ -1,7 +1,6 @@
 package com.example.thanh.movietraining.presenter;
 
 import com.example.thanh.movietraining.retrofix.model.Logins;
-import com.example.thanh.movietraining.view.ILoginListenerView;
 
 public interface ILoginPresenter {
     void getDataSuccess(Logins logins);

@@ -4,14 +4,15 @@ package com.example.thanh.movietraining.presenter;
 import android.util.Log;
 
 import com.example.thanh.movietraining.retrofix.model.Logins;
-import com.example.thanh.movietraining.view.ILoginListenerView;
+import com.example.thanh.movietraining.view.ILoginView;
 import com.example.thanh.movietraining.model.User;
 
 public class LoginPersenter implements ILoginPresenter {
 
-    private ILoginListenerView iLoginListenerView;
+    private ILoginView iLoginListenerView;
+    private  User user;
 
-    public LoginPersenter(ILoginListenerView iLoginListenerView) {
+    public LoginPersenter(ILoginView iLoginListenerView) {
         this.iLoginListenerView = iLoginListenerView;
     }
 
@@ -29,7 +30,7 @@ public class LoginPersenter implements ILoginPresenter {
 
     @Override
     public void onLogin(String email, String password) {
-        User user=new User(email,password,this);
+        user=new User(email,password,this);
         user.isValiData();
     }
 

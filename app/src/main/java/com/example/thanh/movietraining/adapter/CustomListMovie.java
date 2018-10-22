@@ -97,7 +97,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
         viewHolder.txtView.setText(dataModel.getView());
         viewHolder.txtDescription.setText(dataModel.getDescription());
 
-        if (dataModel.isLike() == false) {
+        if (dataModel.isLike() == true) {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_orange_ba);
         } else {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_ba);
@@ -107,7 +107,9 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
             @Override
             public void onClick(View view) {
 
+
                 ListMovieActivity.ActionLike(position);
+
                 Log.d("thanhthanh","result : true");
 
                 if (dataModel.isLike() == false) {

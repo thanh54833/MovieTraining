@@ -4,6 +4,7 @@ package com.example.thanh.movietraining.retrofix.service;
 import com.example.thanh.movietraining.model.User;
 import com.example.thanh.movietraining.retrofix.model.Logins;
 import com.example.thanh.movietraining.retrofix.model.Movies;
+import com.example.thanh.movietraining.retrofix.model.Registers;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -24,6 +25,11 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("/movie/list ")
     Call<Movies> onListView(@Header("app_token") String authKey, @Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
+
+
+    @FormUrlEncoded
+    @POST("/user/registry")
+    Call<Registers> onRegister(@Header("app_token") String authKey, @Field("email") String email, @Field("full_name") String full_name,@Field("password") String password,@Field("gender") String gender,@Field("birthday ") String birthday );//,@Body Datas data);
 
 
 

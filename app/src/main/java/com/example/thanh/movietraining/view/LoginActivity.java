@@ -1,6 +1,5 @@
 package com.example.thanh.movietraining.view;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -13,12 +12,12 @@ import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
-import com.example.thanh.movietraining.Sqlite.DBManager;
+import com.example.thanh.movietraining.Sqlite.DBAcount;
 import com.example.thanh.movietraining.presenter.ILoginPresenter;
 import com.example.thanh.movietraining.presenter.LoginPersenter;
 import com.example.thanh.movietraining.retrofix.model.Logins;
 
-public class LoginActivity extends AppCompatActivity implements ILoginListenerView, View.OnClickListener, View.OnKeyListener {
+public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener, View.OnKeyListener {
     //private ILoginListener loginListener;
 
 
@@ -28,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
     private Button buttonForgotPassword;
     private Button buttonSignIn;
     private TextView textViewLogin;
-    private DBManager dbManager;
+    private DBAcount dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginListenerVi
         buttonSignIn.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
-        dbManager = new DBManager(this);
+        dbManager = new DBAcount(this);
 
     }
 
