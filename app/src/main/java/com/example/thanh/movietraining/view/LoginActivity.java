@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         setContentView(R.layout.activity_login);
 
         init();
-
     }
 
     private void init() {

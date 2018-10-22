@@ -8,8 +8,27 @@ public class Movie {
     private String url;
     private String description;
     private boolean like;
+    private String id;
 
-    public Movie(String movie, String name, String view, String url, String description,boolean like) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Movie(String movie, String name, String view, String url, String description, boolean like, String id) {
+        this.movie = movie;
+        this.name = name;
+        this.view = view;
+        this.url = url;
+        this.description = description;
+        this.like = like;
+        this.id = id;
+    }
+
+    public Movie(String movie, String name, String view, String url, String description, boolean like) {
         this.movie = movie;
         this.name = name;
         this.view = view;

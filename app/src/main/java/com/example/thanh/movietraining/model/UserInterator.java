@@ -3,7 +3,10 @@ package com.example.thanh.movietraining.model;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.widget.Toast;
 
+import com.example.library.Converter;
+import com.example.library.Files;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.presenter.ILoadListener;
 import com.example.thanh.movietraining.retrofix.model.Logins;
@@ -17,6 +20,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.thanh.movietraining.Utils.FILE_DATABASE;
 
 public class UserInterator {
     private ILoadListener loadListener;
@@ -53,10 +58,41 @@ public class UserInterator {
 
                     for(Movies.Data data:movies.getData()){
 
+
+
                         String title=data.getTitle();
                         String movie = null;
                         String name=null;
                         String decription=data.getDescription();
+                        String id=data.getId();
+                        boolean Like;
+
+                        ArrayList<Integer> integers=new ArrayList<>();
+                        Converter converter;
+
+                        byte[] buffer = Files.readFile(FILE_DATABASE);
+                        if(buffer!=null){
+
+                            converter=new Converter(buffer);
+                            do {
+                                integers.add(converter.byteToInterger());
+                            } while (converter.getBuffer() != 0);
+
+                            if(integers.indexOf(Integer.valueOf(data.getId()))!=-1){
+                                Like=true;
+                            }
+                            else {
+                                Like=false;
+                            }
+
+                            Log.d("thanh.result.id","result : id "+data.getId()+" -- index :"+data.getId()+"id :"+integers);
+                        }
+                        else {
+                            if(BuildConfig.DEBUG){
+                               Log.d("thanh.result","byte by null");
+                            }
+                            Like=false;
+                        }
 
 
                         if(decription.length()>250){
@@ -73,7 +109,7 @@ public class UserInterator {
                         }
                         Log.d("thanh.result","result : \n movie :"+movie+"\n name :"+name);
 
-                        Movie movieItem=new Movie(movie.trim(),name.trim(),"Lượt xem : "+data.getViews(),data.getImage(),decription.trim(),false);
+                        Movie movieItem=new Movie(movie.trim(),name.trim(),"Lượt xem : "+data.getViews(),data.getImage(),decription.trim(),Like,id);
                         list.add(movieItem);
                     }
                     if(BuildConfig.DEBUG){

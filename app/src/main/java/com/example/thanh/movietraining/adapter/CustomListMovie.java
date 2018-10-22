@@ -30,7 +30,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
     private Context mContext;
     private Movie dataModel;
     private ViewHolder viewHolder;
-    private boolean isAnimation;
+    public static boolean isAnimation;
 
     // View lookup cache
     private static class ViewHolder {
@@ -41,6 +41,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
         TextView txtDescription;
         Button btnlike;
         Button btnWatchMovie;
+        TextView txtLike;
     }
 
     public CustomListMovie(ArrayList<Movie> data, Context context,boolean isAnimation) {
@@ -77,6 +78,8 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
             viewHolder.txtDescription = (TextView) convertView.findViewById(R.id.txt_description);
             viewHolder.btnlike = (Button) convertView.findViewById(R.id.btn_like);
             viewHolder.btnWatchMovie = (Button) convertView.findViewById(R.id.btn_watch_movie);
+            viewHolder.txtLike=(TextView)convertView.findViewById(R.id.txt_like);
+
 
             result = convertView;
             convertView.setTag(viewHolder);
@@ -99,19 +102,19 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
 
         if (dataModel.isLike() == true) {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_orange_ba);
+            viewHolder.txtLike.setText("Đã thích");
         } else {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_ba);
+            viewHolder.txtLike.setText("Thích");
         }
 
         viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
                 ListMovieActivity.ActionLike(position);
 
                 Log.d("thanhthanh","result : true");
-
                 if (dataModel.isLike() == false) {
                     //dataModel.setLike(true);
                     //Log.d("thanhthanh", "Click like :" + dataModel.isLike() + "position :" + position);
@@ -119,7 +122,6 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
                 } else {
                     //dataModel.setLike(false);
                     //Log.d("thanhthanh", "Click like :" + dataModel.isLike() + "position :" + position);
-
                     //viewHolder.btnlike.setBackgroundResource(ic_like_ba);
                     //notifyDataSetChanged();
                 }
