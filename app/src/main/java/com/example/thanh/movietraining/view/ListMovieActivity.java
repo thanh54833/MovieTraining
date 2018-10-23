@@ -17,7 +17,6 @@ import com.example.thanh.movietraining.adapter.CustomListMovie;
 import com.example.thanh.movietraining.model.Movie;
 import com.example.thanh.movietraining.presenter.ListPresenter;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import static com.example.thanh.movietraining.Utils.FILE_DATABASE;
@@ -63,18 +62,17 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
     }
 
     public void recoderArrayLike() {
+
         parses = new Parses();
         for (int interger : integers) {
             parses.add(parses.getByte(interger));
         }
-        parses.Close();
-        try{
+        try {
             Files.wirteFile(FILE_DATABASE, parses.getBuffer());
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("clicklike", "result :" + e.getMessage());
         }
-
-
+        parses.Close();
     }
 
     @Override
@@ -89,19 +87,29 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
 
         integers = new ArrayList<>();
 
+        if( Files.readFile(FILE_DATABASE)==null){
+            try {
+                Files.wirteFile(FILE_DATABASE, new Parses().getBuffer());
+            } catch (Exception e) {
+                Log.d("clicklike", "result :" + e.getMessage());
+            }
+        }
+
         byte[] buffer = Files.readFile(FILE_DATABASE);
-        if (buffer != null) {
+        if (buffer.length!=0) {
             converter = new Converter(buffer);
             do {
                 integers.add(converter.byteToInterger());
             } while (converter.getBuffer() != 0);
         } else {
             if (BuildConfig.DEBUG) {
-                Toast.makeText(getApplicationContext(), "buffer by null", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "buffer by null :", Toast.LENGTH_SHORT).show();
             }
         }
-        Toast.makeText(getApplicationContext(), "length :" + integers.size(), Toast.LENGTH_SHORT).show();
 
+        Log.d("ListMovieActivity.thanh", "result :" + Files.readFile(FILE_DATABASE));
+
+        Toast.makeText(getApplicationContext(), "length :" + integers.size(), Toast.LENGTH_SHORT).show();
         //parses.Close();*/
 
         listView = findViewById(R.id.list_view);
@@ -115,7 +123,6 @@ public class ListMovieActivity extends AppCompatActivity implements ListItem {
                 if (!listView.canScrollVertically(1) && scrollState == SCROLL_STATE_IDLE && TOTAL_PAGE == 10) {
 
                     recoderArrayLike();
-
 
                     PAGE = PAGE + 1;
                     mainPresenter.loadData(String.valueOf(PAGE), "10");

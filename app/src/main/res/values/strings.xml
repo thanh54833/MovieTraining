@@ -2,4 +2,6 @@
     <string name="app_name">MovieTraining</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="facebook_app_id">112049483045112</string>
+    <string name="facebook_login_protocol_scheme"></string>
 </resources>

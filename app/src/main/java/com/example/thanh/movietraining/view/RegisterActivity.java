@@ -40,9 +40,7 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
         setContentView(R.layout.activity_register);
 
         init();
-
     }
-
     private void init() {
         edt_name=findViewById(R.id.edt_name);
         edt_email=findViewById(R.id.edt_email);
