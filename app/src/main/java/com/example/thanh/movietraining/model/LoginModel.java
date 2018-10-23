@@ -1,58 +1,57 @@
-package com.example.thanh.movietraining.retrofix.model;
+package com.example.thanh.movietraining.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Registers {
+public class LoginModel {
     @SerializedName("message")
-    private String message;
+    public String message;
     @SerializedName("error")
-    private String error;
+    public String error;
     @SerializedName("data")
-    private Data data;
+    public Data data;
     @SerializedName("code")
-    private String code;
+    public String code;
 
-    public String getMessage ()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage (String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getError ()
-    {
+    public String getError() {
         return error;
     }
 
-    public void setError (String error)
-    {
+    public void setError(String error) {
         this.error = error;
     }
 
-    public Data getData ()
-    {
+    public Data getData() {
         return data;
     }
 
-    public void setData (Data data)
-    {
+    public void setData(Data data) {
         this.data = data;
     }
 
-    public String getCode ()
-    {
+    public String getCode() {
         return code;
     }
 
-    public void setCode (String code)
-    {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public class Data {
+    public LoginModel(String message, String error, Data data, String code) {
+        this.message = message;
+        this.error = error;
+        this.data = data;
+        this.code = code;
+    }
+
+    public static class Data {
         @SerializedName("id")
         private String id;
         @SerializedName("birthday")
@@ -64,6 +63,7 @@ public class Registers {
         @SerializedName("created_at")
         private String created_at;
         @SerializedName("google_id")
+
         private String google_id;
         @SerializedName("gender")
         private String gender;
@@ -75,6 +75,25 @@ public class Registers {
         private String access_token;
         @SerializedName("full_name")
         private String full_name;
+
+        public Data(String id, String birthday, String updated_at, String email, String created_at, String google_id, String gender, String facebook_id, String password, String access_token, String full_name) {
+            this.id = id;
+            this.birthday = birthday;
+            this.updated_at = updated_at;
+            this.email = email;
+            this.created_at = created_at;
+            this.google_id = google_id;
+            this.gender = gender;
+            this.facebook_id = facebook_id;
+            this.password = password;
+            this.access_token = access_token;
+            this.full_name = full_name;
+        }
+
+        public Data(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
 
         public String getId() {
             return id;
@@ -164,5 +183,4 @@ public class Registers {
             this.full_name = full_name;
         }
     }
-
 }

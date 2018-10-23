@@ -2,11 +2,12 @@ package com.example.thanh.movietraining.presenter;
 
 import com.example.library.Converter;
 import com.example.library.Files;
+import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.model.MovieModel;
 import com.example.thanh.movietraining.object.Movie;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
-import com.example.thanh.movietraining.view.IListMovie;
+import com.example.thanh.movietraining.view.IListMovieView;
 
 import java.util.ArrayList;
 
@@ -16,17 +17,17 @@ import retrofit2.Response;
 
 import static com.example.thanh.movietraining.Utils.FILE_DATABASE;
 
-public class ListPresenter implements com.example.thanh.movietraining.presenter.IListMovie {
+public class ListPresenter implements IListPresenter {
 
-    private IListMovie listMovie;
-    public ListPresenter(IListMovie listMovie) {
+    private IListMovieView listMovie;
+    public ListPresenter(IListMovieView listMovie) {
         this.listMovie = listMovie;
     }
     @Override
     public void LoadListView(String page, String per_page) {
 
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        final Call<MovieModel> call = apiInterface.onListView("dCuW7UQMbdvpcBDfzolAOSGFIcAec11a", page, per_page);
+        final Call<MovieModel> call = apiInterface.onListView(Utils.key_token, page, per_page);
 
         call.enqueue(new Callback<MovieModel>() {
             @Override

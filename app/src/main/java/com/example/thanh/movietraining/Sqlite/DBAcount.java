@@ -7,11 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.thanh.movietraining.retrofix.model.Logins;
+import com.example.thanh.movietraining.model.LoginModel;
+import com.example.thanh.movietraining.model.MovieModel;
 
-/**
- * Created by chien on 4/8/17.
- */
 
 public class DBAcount extends SQLiteOpenHelper {
     private final String TAG = "DBManager";
@@ -71,7 +69,7 @@ public class DBAcount extends SQLiteOpenHelper {
         Log.d(TAG, "onUpgrade: ");
     }
 
-    public void addAccount(Logins logins) {
+    public void addAccount(LoginModel logins) {
 
         deleteStudent();
 
@@ -99,22 +97,23 @@ public class DBAcount extends SQLiteOpenHelper {
         Log.d(TAG, "add Account Successfuly");
     }
 
-    public Logins getAccount() {
+    public LoginModel getAccount() {
 
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Logins logins = null;
+        LoginModel logins = null;
         cursor.moveToFirst();
-        Logins.Datas datas = new Logins.Datas(cursor.getString(0), cursor.getString(7), cursor.getString(12), cursor.getString(13), cursor.getString(11), cursor.getString(9), cursor.getString(6), cursor.getString(8), cursor.getString(4), cursor.getString(10), cursor.getString(5));
-        logins = new Logins(cursor.getString(3), cursor.getString(1), datas, cursor.getString(2));
+
+        LoginModel.Data data = new LoginModel.Data(cursor.getString(0), cursor.getString(7), cursor.getString(12), cursor.getString(13), cursor.getString(11), cursor.getString(9), cursor.getString(6), cursor.getString(8), cursor.getString(4), cursor.getString(10), cursor.getString(5));
+        logins = new LoginModel(cursor.getString(3), cursor.getString(1), data, cursor.getString(2));
 
         db.close();
         return logins;
     }
 
-    public int updateStudent(Logins logins) {
+    public int updateStudent(LoginModel logins) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 

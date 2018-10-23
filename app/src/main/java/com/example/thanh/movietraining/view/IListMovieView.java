@@ -5,7 +5,7 @@ import com.example.thanh.movietraining.object.Movie;
 
 import java.util.ArrayList;
 
-public interface IListMovie {
+public interface IListMovieView {
      void displayMain(ArrayList<Movie> list);
      void showLoading();
      void hideLoading();

@@ -4,6 +4,6 @@ import com.example.thanh.movietraining.object.Movie;
 
 import java.util.ArrayList;
 
-public interface IListMovie {
+public interface IListPresenter {
     void LoadListView(String page,String per_page);
 }

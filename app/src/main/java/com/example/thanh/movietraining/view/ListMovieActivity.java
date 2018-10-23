@@ -1,6 +1,5 @@
 package com.example.thanh.movietraining.view;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,15 +16,13 @@ import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.adapter.CustomListMovie;
 import com.example.thanh.movietraining.object.Movie;
 import com.example.thanh.movietraining.presenter.ListPresenter;
-import com.squareup.picasso.Picasso;
 
-import java.time.Instant;
 import java.util.ArrayList;
 
 import static com.example.thanh.movietraining.Utils.FILE_DATABASE;
 
 
-public class ListMovieActivity extends AppCompatActivity implements IListMovie {
+public class ListMovieActivity extends AppCompatActivity implements IListMovieView {
     
     private ListView listView;
     private ListPresenter mainPresenter;

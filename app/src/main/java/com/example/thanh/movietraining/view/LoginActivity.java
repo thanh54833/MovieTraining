@@ -14,9 +14,8 @@ import android.widget.Toast;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
 import com.example.thanh.movietraining.Sqlite.DBAcount;
-import com.example.thanh.movietraining.presenter.ILoginPresenter;
-import com.example.thanh.movietraining.presenter.LoginPersenter;
-import com.example.thanh.movietraining.retrofix.model.Logins;
+import com.example.thanh.movietraining.model.LoginModel;
+import com.example.thanh.movietraining.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener, View.OnKeyListener {
     //private ILoginListener loginListener;
@@ -47,20 +46,21 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         buttonForgotPassword = findViewById(R.id.btn_forgot_password);
         btn_register = findViewById(R.id.btn_register);
         btn_register.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        textViewLogin=findViewById(R.id.tv_login);
+        textViewLogin = findViewById(R.id.tv_login);
         buttonLogin.setOnClickListener(this);
         buttonForgotPassword.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
+
         dbManager = new DBAcount(this);
 
     }
 
     @Override
-    public void getDataSuccess(Logins logins) {
+    public void getDataSuccess(LoginModel logins) {
         dbManager.addAccount(logins);
         if (BuildConfig.DEBUG) {
-            Toast.makeText(this, "Login success : \n name :" +dbManager.getAccount().data.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login success : \n name :" + dbManager.getAccount().data.getEmail(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -128,16 +128,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                     break;
             }
         }
-
-
         return false;
     }
 
     private void onLogin() {
-        String email = editTextEmail.getText().toString();//"phamhoaithanh32@gmail.com";
-        String pass = editTextPassword.getText().toString();//"Lumia520";
-
-        ILoginPresenter iLoginPresenter = new LoginPersenter(this);
+        String email = editTextEmail.getText().toString();//editTextEmail.getText().toString();//"phamhoaithanh32@gmail.com";
+        String pass = editTextPassword.getText().toString();//editTextPassword.getText().toString();//"Lumia520";
+        LoginPresenter iLoginPresenter = new LoginPresenter(this);
         iLoginPresenter.onLogin(email, pass);
     }
 

@@ -1,18 +1,17 @@
-package com.example.thanh.movietraining.retrofix.model;
+package com.example.thanh.movietraining.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Logins {
+public class RegisterModel {
 
     @SerializedName("message")
-    public String message;
+    private String message;
     @SerializedName("error")
-    public String error;
+    private String error;
     @SerializedName("data")
-    public Datas data;
+    private Data data;
     @SerializedName("code")
-    public String code;
+    private String code;
 
     public String getMessage() {
         return message;
@@ -30,11 +29,11 @@ public class Logins {
         this.error = error;
     }
 
-    public Datas getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(Datas data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
@@ -46,74 +45,29 @@ public class Logins {
         this.code = code;
     }
 
-    public Logins() {
-        }
-
-    public Logins(String message, String error, Datas data, String code) {
-        this.message = message;
-        this.error = error;
-        this.data = data;
-        this.code = code;
-    }
-
-    public static class Datas {
+    public class Data {
         @SerializedName("id")
-        @Expose
         private String id;
         @SerializedName("birthday")
-        @Expose
         private String birthday;
         @SerializedName("updated_at")
-        @Expose
         private String updated_at;
         @SerializedName("email")
-        @Expose
         private String email;
         @SerializedName("created_at")
-        @Expose
         private String created_at;
         @SerializedName("google_id")
-        @Expose
         private String google_id;
         @SerializedName("gender")
-        @Expose
         private String gender;
         @SerializedName("facebook_id")
-        @Expose
         private String facebook_id;
         @SerializedName("password")
-        @Expose
         private String password;
         @SerializedName("access_token")
-        @Expose
         private String access_token;
         @SerializedName("full_name")
-        @Expose
         private String full_name;
-
-        public Datas(String id, String birthday, String updated_at, String email, String created_at, String google_id, String gender, String facebook_id, String password, String access_token, String full_name) {
-            this.id = id;
-            this.birthday = birthday;
-            this.updated_at = updated_at;
-            this.email = email;
-            this.created_at = created_at;
-            this.google_id = google_id;
-            this.gender = gender;
-            this.facebook_id = facebook_id;
-            this.password = password;
-            this.access_token = access_token;
-            this.full_name = full_name;
-        }
-
-
-        public Datas() {
-
-        }
-
-        public Datas(String email, String password) {
-            this.email = email;
-            this.password = password;
-        }
 
         public String getId() {
             return id;
@@ -202,9 +156,7 @@ public class Logins {
         public void setFull_name(String full_name) {
             this.full_name = full_name;
         }
-
-
     }
 
-
 }
+

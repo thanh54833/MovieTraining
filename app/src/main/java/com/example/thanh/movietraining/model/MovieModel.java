@@ -23,6 +23,8 @@ public class MovieModel {
         this.paging = paging;
     }
 
+
+
     public String getMessage() {
         return message;
     }
@@ -114,7 +116,7 @@ public class MovieModel {
     }
 
 
-    public class Data {
+    public  class Data {
         @SerializedName("link")
         private String link;
         @SerializedName("image")
@@ -147,7 +149,7 @@ public class MovieModel {
         private String year;
 
 
-        public Data(String link, String image, String actor, String type, String director, String id, String title, String category, String duration, String updated_at, String views, String description, String manufacturer, String created_at, String year) {
+        public Data(String link, String image, String actor, String type, String director, String id, String title, String category, String duration, String updated_at, String views) {
             this.link = link;
             this.image = image;
             this.actor = actor;
@@ -285,4 +287,6 @@ public class MovieModel {
             this.year = year;
         }
     }
+
+
 }

@@ -2,12 +2,7 @@ package com.example.thanh.movietraining.view;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +11,8 @@ import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
-import com.example.thanh.movietraining.presenter.ILoginPresenter;
-import com.example.thanh.movietraining.presenter.LoginPersenter;
+import com.example.thanh.movietraining.model.RegisterModel;
 import com.example.thanh.movietraining.presenter.RegisterPersenter;
-import com.example.thanh.movietraining.retrofix.model.Registers;
 
 public class RegisterActivity extends AppCompatActivity  implements IRegisterView,View.OnClickListener {
 
@@ -55,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
     }
 
     @Override
-    public void getDataSuccess(Registers registers) {
+    public void getDataSuccess(RegisterModel registers) {
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Register success : true ", Toast.LENGTH_SHORT).show();
             Log.d("thanhthanh","result : Register success");
@@ -76,11 +69,10 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
                 Toast.makeText(getApplicationContext(),"Click register ...",Toast.LENGTH_SHORT).show();
 
                 String email =edt_email.getText().toString() ;//"thanhhang54833@gmail.com";
-                String full_name=edt_email.getText().toString();//"pham hoai thanh";
+                String full_name=edt_name.getText().toString();//"pham hoai thanh";
                 String password = edt_password.getText().toString();
                 String gender="";//"male";
                 String birthday="";
-
                 if(edt_password.getText().toString().equalsIgnoreCase(edt_forgot_password.getText().toString()))
                 {
                     RegisterPersenter registerPersenter = new RegisterPersenter(this);

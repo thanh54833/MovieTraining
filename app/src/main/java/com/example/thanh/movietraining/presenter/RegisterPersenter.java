@@ -1,59 +1,49 @@
 package com.example.thanh.movietraining.presenter;
 
-
 import android.util.Log;
 
-import com.example.thanh.movietraining.model.Register;
-import com.example.thanh.movietraining.model.User;
-import com.example.thanh.movietraining.retrofix.model.Logins;
-import com.example.thanh.movietraining.retrofix.model.Registers;
-import com.example.thanh.movietraining.view.ILoginView;
+import com.example.thanh.movietraining.BuildConfig;
+import com.example.thanh.movietraining.Utils;
+import com.example.thanh.movietraining.model.RegisterModel;
+import com.example.thanh.movietraining.retrofix.service.APIClient;
+import com.example.thanh.movietraining.retrofix.service.APIInterface;
 import com.example.thanh.movietraining.view.IRegisterView;
 
-public class RegisterPersenter implements IRegisterPresenter {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class RegisterPersenter implements IRegisterPresenter{
 
     private IRegisterView iRegisterView;
-    private Register register;
-
     public RegisterPersenter(IRegisterView iRegisterView) {
-        this.iRegisterView = iRegisterView;
-    }
-
-    @Override
-    public void getDataSuccess(Registers registers) {
-        Log.d("loginlistener","login success...");
-        iRegisterView.getDataSuccess(registers);
-    }
-
-    @Override
-    public void getMessageError(String e) {
-        Log.d("loginlistener","login error...");
-        iRegisterView.getMessageError(e);
+        this.iRegisterView=iRegisterView;
     }
 
     @Override
     public void onRegister(String email, String full_name, String password, String gender, String birthday) {
 
-        register=new Register(email,full_name,password,gender,birthday,this);
-        register.isValiData();
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        final Call<RegisterModel> call = apiInterface.onRegister(Utils.key_token, email,full_name,password,gender,birthday);
 
+        call.enqueue(new Callback<RegisterModel>() {
+            @Override
+            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+                if(response.isSuccessful()){
+                    RegisterModel registers = response.body();
+                    if(registers.getError().equals("false"))
+                    {
+                        iRegisterView.getDataSuccess(registers);
+                    }
+                    else {
+                        iRegisterView.getMessageError("Email has been existed");
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<RegisterModel> call, Throwable t) {
+                iRegisterView.getMessageError(t.getLocalizedMessage());
+            }
+        });
     }
-
-
-    /*@Override
-    public void getDataSuccess(Logins login) {
-     Log.d("loginlistener","login success...");
-        iLoginListenerView.getDataSuccess(login);
-    }
-    @Override
-    public void getMessageError(String e) {
-        Log.d("loginlistener","login error...");
-        iLoginListenerView.getMessageError(e);
-    }
-    @Override
-    public void onLogin(String email, String password) {
-        user=new User(email,password,this);
-        user.isValiData();
-    }*/
-
 }

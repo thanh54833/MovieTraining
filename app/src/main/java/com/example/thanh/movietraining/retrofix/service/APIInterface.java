@@ -1,8 +1,9 @@
 package com.example.thanh.movietraining.retrofix.service;
 
 
+import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.model.MovieModel;
-import com.example.thanh.movietraining.retrofix.model.Logins;
+import com.example.thanh.movietraining.model.RegisterModel;
 import com.example.thanh.movietraining.retrofix.model.Registers;
 
 import retrofit2.Call;
@@ -19,7 +20,7 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("/user/login")
-    Call<Logins> onLogin(@Header("app_token") String authKey, @Field("email") String email, @Field("password") String password);//,@Body Datas data);
+    Call<LoginModel> onLogin(@Header("app_token") String authKey, @Field("email") String email, @Field("password") String password);//,@Body Datas data);
 
     @FormUrlEncoded
     @POST("/movie/list ")
@@ -28,27 +29,6 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("/user/registry")
-    Call<Registers> onRegister(@Header("app_token") String authKey, @Field("email") String email, @Field("full_name") String full_name,@Field("password") String password,@Field("gender") String gender,@Field("birthday ") String birthday );//,@Body Datas data);
+    Call<RegisterModel> onRegister(@Header("app_token") String authKey, @Field("email") String email, @Field("full_name") String full_name, @Field("password") String password, @Field("gender") String gender, @Field("birthday ") String birthday);//,@Body Datas data);
 
-
-
-    /*
-    @GET("/api/unknown")
-    Call<MultipleResource> doGetListResources();
-    @GET("/api/users?")
-    Call<UserList> doGetUserList(@Query("page") String page);
-    @FormUrlEncoded
-    @POST("/api/users?")
-    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);*/
-    //@Headers("app_token:dCuW7UQMbdvpcBDfzolAOSGFIcAec11a")
-    // @POST("/user/login")
-    //Call<Login> onLogin(@Body Account account);
-    //@FormUrlEncoded
-    //@Headers("app_token: dCuW7UQMbdvpcBDfzolAOSGFIcAec11a")
-    //@Header("app_token") String authKey
-    ///@Headers("Content-Type: application/json")
-    //@POST("/user/login")
-    //Call<Login> onLogin(@Header("app_token") String authKey,@Query("email") String email, @Query("password")  String password);
-    //@POST("/user/login")
-    //Call<Login> onLogin(@Header("app_token") String authKey,@Body String body);
 }

@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.thanh.movietraining.retrofix.model.Logins;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
