@@ -16,7 +16,6 @@ public class APIClient {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://training-movie.bsp.vn:82")
-                //.baseUrl("https://reqres.in")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit;

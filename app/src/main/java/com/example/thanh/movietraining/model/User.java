@@ -16,8 +16,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class User implements IUser {
+
     private String email;
     private String password;
+
     public static final String Tag = "myapplication.presenter";
     private ILoginPresenter iLoginPresenter;
 

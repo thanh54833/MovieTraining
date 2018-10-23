@@ -56,8 +56,10 @@ public class Main extends AppCompatActivity {
         mBtnLoginFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
                 mTvInfo.setText("User ID: " + loginResult.getAccessToken().getUserId() + "\n" + "Auth Token: " + loginResult.getAccessToken().getToken());
-               /* GraphRequest.newMeRequest(
+
+                /*GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -73,14 +75,12 @@ public class Main extends AppCompatActivity {
                                     }
                                 }
                             }
-
-                        }).executeAsync();*/
+                            }).executeAsync();*/
             }
             @Override
             public void onCancel() {
                 mTvInfo.setText("Login canceled.");
             }
-
             @Override
             public void onError(FacebookException e) {
                 mTvInfo.setText("Login failed.");

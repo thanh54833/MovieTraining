@@ -1,8 +1,9 @@
-package com.example.thanh.movietraining.retrofix.model;
+package com.example.thanh.movietraining.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Movies {
+public class MovieModel {
+
     @SerializedName("message")
     private String message;
     @SerializedName("error")
@@ -14,7 +15,7 @@ public class Movies {
     @SerializedName("paging")
     private Paging paging;
 
-    public Movies(String message, String error, Data[] data, String code, Paging paging) {
+    public MovieModel(String message, String error, Data[] data, String code, Paging paging) {
         this.message = message;
         this.error = error;
         this.data = data;

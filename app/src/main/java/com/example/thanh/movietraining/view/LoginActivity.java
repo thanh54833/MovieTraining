@@ -21,7 +21,6 @@ import com.example.thanh.movietraining.retrofix.model.Logins;
 public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener, View.OnKeyListener {
     //private ILoginListener loginListener;
 
-
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
@@ -29,7 +28,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     private TextView textViewLogin;
     private DBAcount dbManager;
     private Button btn_register;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

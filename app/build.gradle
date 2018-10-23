@@ -15,6 +15,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "IS_DEBUG", "false"
         }
     }
 }
@@ -35,9 +37,9 @@ dependencies {
 
     //add
     implementation project(':library')
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.facebook.android:facebook-android-sdk:4.19.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 
 }
