@@ -1,8 +1,11 @@
 package com.example.thanh.movietraining.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -10,8 +13,10 @@ import android.widget.Toast;
 import com.example.library.Converter;
 import com.example.library.Files;
 import com.example.library.Parses;
+import com.example.library.Util;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
+import com.example.thanh.movietraining.Sqlite.DBAcount;
 import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.adapter.CustomListMovie;
 import com.example.thanh.movietraining.object.Movie;
@@ -33,6 +38,7 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     private static Parses parses;
     private static ArrayList<Integer> integers;
     private Converter converter;
+    private static Context context;
 
 
 
@@ -48,10 +54,19 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         getSupportActionBar().getCustomView();
 
-
         init();
-    }
 
+        try {
+            Files.wirteFile(FILE_DATABASE, new Parses().getBuffer());
+        } catch (Exception e) {
+            Utils.messageDisplay("result :" + e.getMessage());
+        }
+
+        DBAcount dbManager = new DBAcount(this);
+        dbManager.deleteAccount();
+
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -64,6 +79,7 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     @Override
     protected void onStop() {
         super.onStop();
+        recoderArrayLike();
         if(BuildConfig.DEBUG){
             Utils.messageDisplay("on stop...");
         }
@@ -84,8 +100,10 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     }
 
     private void init() {
+
         integers = new ArrayList<>();
         LoadArrayLike();
+        context=getApplicationContext();
         listView = findViewById(R.id.list_view);
         mainPresenter = new ListPresenter(this);
         mainPresenter.LoadListView(String.valueOf(PAGE), "10");
@@ -148,6 +166,9 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
         CustomListMovie.isAnimation = false;
         adapter.notifyDataSetChanged();
     }
+
+
+
     @Override
     public void showLoading() {
 
@@ -160,5 +181,5 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     public void showError() {
 
     }
-
+    //baby jaserick
 }

@@ -1,6 +1,7 @@
 package com.example.thanh.movietraining.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.library.DownloadImageTask;
 import com.example.library.Picassos;
+import com.example.library.Util;
+import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
+import com.example.thanh.movietraining.Sqlite.DBAcount;
+import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.object.Movie;
 import com.example.thanh.movietraining.view.ListMovieActivity;
+import com.example.thanh.movietraining.view.LoginActivity;
+import com.example.thanh.movietraining.view.WatchMovieActivity;
 
 import java.util.ArrayList;
 
@@ -26,6 +34,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
     private ViewHolder viewHolder;
     public static boolean isAnimation;
     private int lastPosition = -1;
+    private ArrayList<Movie> data;
 
 
     private static class ViewHolder {
@@ -41,8 +50,10 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
 
     public CustomListMovie(ArrayList<Movie> data, Context context, boolean isAnimation) {
         super(context, R.layout.row_item, data);
+
         this.mContext = context;
         this.isAnimation = isAnimation;
+        this.data = data;
     }
 
     @Override
@@ -75,12 +86,20 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
         //load image download url connection ..
         //new DownloadImageTask(viewHolder.imageView).execute(dataModel.getUrl());
         //load image pocasso ...
-        new Picassos(viewHolder.imageView,mContext,dataModel.getUrl());
+        new Picassos(viewHolder.imageView, mContext, dataModel.getUrl());
 
         viewHolder.txtMovie.setText(dataModel.getMovie());
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtView.setText(dataModel.getView());
-        viewHolder.txtDescription.setText(dataModel.getDescription());
+
+
+        String decription = dataModel.getDescription();
+
+        if (decription.length() > 200) {
+            decription = decription.substring(0, 200) + "...";
+        }
+
+        viewHolder.txtDescription.setText(decription);
         if (dataModel.isLike() == true) {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_orange_ba);
             viewHolder.txtLike.setText("Đã thích");
@@ -88,7 +107,6 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_ba);
             viewHolder.txtLike.setText("Thích");
         }
-
         viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,12 +114,29 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
             }
         });
 
-       /* viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
+        //final DBAcount dbManager = new DBAcount(mContext);
+
+        viewHolder.btnWatchMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListMovieActivity.ActionWatch(position);
+
+                WatchMovieActivity.ActionWatch(position, data);
+
+                DBAcount dbManager = new DBAcount(getContext());
+                if (dbManager.getAccount() != null && !dbManager.getAccount().data.getEmail().equals("")) {
+                    Utils.messageDisplay("result gmail :" + dbManager.getAccount().data.getEmail());
+                    Intent i = new Intent(mContext, WatchMovieActivity.class);
+                    mContext.startActivity(i);
+                } else {
+                    Intent i = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(i);
+                }
+
+
+                //Utils.messageDisplay("Account :"+dbManager.getAccount().data.getEmail());
+
             }
-        });*/
+        });
 
         return convertView;
     }

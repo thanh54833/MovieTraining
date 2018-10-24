@@ -1,5 +1,6 @@
 package com.example.thanh.movietraining.view;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +35,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         init();
+
     }
 
     private void init() {
@@ -51,14 +52,22 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         buttonForgotPassword.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
+        btn_register.setOnClickListener(this);
 
         dbManager = new DBAcount(this);
+
+
+
 
     }
 
     @Override
     public void getDataSuccess(LoginModel logins) {
         dbManager.addAccount(logins);
+
+        Intent intent=new Intent(this,WatchMovieActivity.class);
+        startActivity(intent);
+
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Login success : \n name :" + dbManager.getAccount().data.getEmail(), Toast.LENGTH_SHORT).show();
         }
@@ -80,6 +89,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
 
                     onLogin();
                 }
+                break;
+            case R.id.btn_register:
+
+                Intent intent=new Intent(this,RegisterActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(this, "Click button register ...", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -133,6 +149,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     private void onLogin() {
         String email = editTextEmail.getText().toString();//editTextEmail.getText().toString();//"phamhoaithanh32@gmail.com";
         String pass = editTextPassword.getText().toString();//editTextPassword.getText().toString();//"Lumia520";
+
         LoginPresenter iLoginPresenter = new LoginPresenter(this);
         iLoginPresenter.onLogin(email, pass);
     }

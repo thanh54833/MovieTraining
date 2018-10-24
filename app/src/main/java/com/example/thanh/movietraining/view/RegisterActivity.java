@@ -1,5 +1,6 @@
 package com.example.thanh.movietraining.view;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
+import com.example.thanh.movietraining.Sqlite.DBAcount;
+import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.model.RegisterModel;
 import com.example.thanh.movietraining.presenter.RegisterPersenter;
 
@@ -49,6 +52,19 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
 
     @Override
     public void getDataSuccess(RegisterModel registers) {
+
+
+        DBAcount dbManager = new DBAcount(this);
+
+        LoginModel.Data data=new LoginModel.Data(registers.getData().getId(),registers.getData().getBirthday(),registers.getData().getUpdated_at(),registers.getData().getEmail(),registers.getData().getCreated_at(),registers.getData().getGoogle_id(),registers.getData().getGender(),registers.getData().getFacebook_id(),registers.getData().getPassword(),registers.getData().getAccess_token(),registers.getData().getFull_name());
+
+        LoginModel logins = new LoginModel(registers.getMessage(),registers.getError(),data,registers.getCode());
+
+        dbManager.addAccount(logins);
+
+        Intent intent=new Intent(this,WatchMovieActivity.class);
+        startActivity(intent);
+
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Register success : true ", Toast.LENGTH_SHORT).show();
             Log.d("thanhthanh","result : Register success");

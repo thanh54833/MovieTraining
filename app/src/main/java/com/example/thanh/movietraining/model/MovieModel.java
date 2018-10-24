@@ -23,8 +23,6 @@ public class MovieModel {
         this.paging = paging;
     }
 
-
-
     public String getMessage() {
         return message;
     }

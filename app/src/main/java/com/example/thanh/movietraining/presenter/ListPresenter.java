@@ -37,11 +37,20 @@ public class ListPresenter implements IListPresenter {
                     MovieModel movies = response.body();
                     ArrayList<Movie> list = new ArrayList<>();
                     for (MovieModel.Data data : movies.getData()) {
+
                         String title = data.getTitle();
                         String movie = null;
                         String name = null;
                         String decription = data.getDescription();
                         String id = data.getId();
+
+                        String director=data.getDirector();
+                        String manufacturer=data.getManufacturer();
+                        String duration=data.getDuration();
+                        String actor=data.getActor();
+                        String link=data.getLink();
+                        String genres=data.getCategory();
+
                         boolean Like;
                         ArrayList<Integer> integers = new ArrayList<>();
                         Converter converter;
@@ -60,9 +69,9 @@ public class ListPresenter implements IListPresenter {
                         } else {
                             Like = false;
                         }
-                        if (decription.length() > 200) {
-                            decription = decription.substring(0, 200) + "...";
-                        }
+
+
+
                         if (title.indexOf("/") > 0) {
                             movie = title.substring(0, title.indexOf("/"));
                             name = title.substring(title.indexOf("/") + 1, title.length());
@@ -70,7 +79,8 @@ public class ListPresenter implements IListPresenter {
                             movie = title;
                             name = title;
                         }
-                        Movie movieItem = new Movie(movie.trim(), name.trim(), "Lượt xem : " + data.getViews(), data.getImage(), decription.trim(), Like, id);
+
+                        Movie movieItem = new Movie(movie.trim(), name.trim(), "Lượt xem : " + data.getViews(), data.getImage(), decription.trim(), Like, id,director,manufacturer,duration,actor,link,genres);
                         list.add(movieItem);
                     }
                     listMovie.displayMain(list);
@@ -81,7 +91,6 @@ public class ListPresenter implements IListPresenter {
                 call.cancel();
             }
         });
-
 
     }
 

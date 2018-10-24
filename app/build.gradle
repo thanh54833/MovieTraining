@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.thanh.movietraining"
@@ -38,5 +42,5 @@ dependencies {
     implementation project(':library')
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
-

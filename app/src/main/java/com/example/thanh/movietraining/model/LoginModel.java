@@ -12,6 +12,8 @@ public class LoginModel {
     @SerializedName("code")
     public String code;
 
+
+
     public String getMessage() {
         return message;
     }
@@ -50,7 +52,6 @@ public class LoginModel {
         this.data = data;
         this.code = code;
     }
-
     public static class Data {
         @SerializedName("id")
         private String id;
@@ -76,6 +77,7 @@ public class LoginModel {
         @SerializedName("full_name")
         private String full_name;
 
+
         public Data(String id, String birthday, String updated_at, String email, String created_at, String google_id, String gender, String facebook_id, String password, String access_token, String full_name) {
             this.id = id;
             this.birthday = birthday;
@@ -90,10 +92,6 @@ public class LoginModel {
             this.full_name = full_name;
         }
 
-        public Data(String email, String password) {
-            this.email = email;
-            this.password = password;
-        }
 
         public String getId() {
             return id;

@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.thanh.movietraining.model.LoginModel;
-import com.example.thanh.movietraining.model.MovieModel;
 
 
 public class DBAcount extends SQLiteOpenHelper {
@@ -71,7 +70,7 @@ public class DBAcount extends SQLiteOpenHelper {
 
     public void addAccount(LoginModel logins) {
 
-        deleteStudent();
+        deleteAccount();
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -99,18 +98,23 @@ public class DBAcount extends SQLiteOpenHelper {
 
     public LoginModel getAccount() {
 
-        String selectQuery = "SELECT * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+            String selectQuery = "SELECT * FROM " + TABLE_NAME;
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        LoginModel logins = null;
-        cursor.moveToFirst();
+            LoginModel logins = null;
+            cursor.moveToFirst();
 
-        LoginModel.Data data = new LoginModel.Data(cursor.getString(0), cursor.getString(7), cursor.getString(12), cursor.getString(13), cursor.getString(11), cursor.getString(9), cursor.getString(6), cursor.getString(8), cursor.getString(4), cursor.getString(10), cursor.getString(5));
-        logins = new LoginModel(cursor.getString(3), cursor.getString(1), data, cursor.getString(2));
+            LoginModel.Data data = new LoginModel.Data(cursor.getString(0), cursor.getString(7), cursor.getString(12), cursor.getString(13), cursor.getString(11), cursor.getString(9), cursor.getString(6), cursor.getString(8), cursor.getString(4), cursor.getString(10), cursor.getString(5));
+            logins = new LoginModel(cursor.getString(3), cursor.getString(1), data, cursor.getString(2));
 
-        db.close();
-        return logins;
+            db.close();
+            return logins;
+
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public int updateStudent(LoginModel logins) {
@@ -135,7 +139,7 @@ public class DBAcount extends SQLiteOpenHelper {
         return db.update(TABLE_NAME, values, id + "=?", new String[]{String.valueOf(logins.data.getId())});
     }
 
-    public int deleteStudent() {
+    public int deleteAccount() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, null, null);
     }
