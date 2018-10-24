@@ -60,8 +60,8 @@ public class ListPresenter implements IListPresenter {
                         } else {
                             Like = false;
                         }
-                        if (decription.length() > 250) {
-                            decription = decription.substring(0, 250) + "...";
+                        if (decription.length() > 200) {
+                            decription = decription.substring(0, 200) + "...";
                         }
                         if (title.indexOf("/") > 0) {
                             movie = title.substring(0, title.indexOf("/"));

@@ -41,11 +41,14 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_movie);
+
         //custom title bar ...
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         getSupportActionBar().getCustomView();
+
+
         init();
     }
 

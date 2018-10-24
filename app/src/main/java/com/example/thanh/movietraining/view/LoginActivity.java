@@ -130,14 +130,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         }
         return false;
     }
-
     private void onLogin() {
         String email = editTextEmail.getText().toString();//editTextEmail.getText().toString();//"phamhoaithanh32@gmail.com";
         String pass = editTextPassword.getText().toString();//editTextPassword.getText().toString();//"Lumia520";
         LoginPresenter iLoginPresenter = new LoginPresenter(this);
         iLoginPresenter.onLogin(email, pass);
     }
-
     private void closeKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);

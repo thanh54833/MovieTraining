@@ -23,14 +23,13 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
+import java.util.Arrays;
 
-public class Main extends AppCompatActivity {
-
+public class facebook extends AppCompatActivity {
 
     private TextView mTvInfo;
     private LoginButton mBtnLoginFacebook;
     private CallbackManager mCallbackManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +47,17 @@ public class Main extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("ExampleLoginFacebook", "Error 1:" + e.getMessage());
         }
-
         mCallbackManager = CallbackManager.Factory.create();
         mTvInfo = (TextView) findViewById(R.id.tv_info);
         mBtnLoginFacebook = (LoginButton) findViewById(R.id.btn_login_facebook);
-
+        //mBtnLoginFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
+        mBtnLoginFacebook.setReadPermissions("email");
         mBtnLoginFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
                 mTvInfo.setText("User ID: " + loginResult.getAccessToken().getUserId() + "\n" + "Auth Token: " + loginResult.getAccessToken().getToken());
-
-                /*GraphRequest.newMeRequest(
+                GraphRequest request =GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -69,13 +67,19 @@ public class Main extends AppCompatActivity {
                                     // get email and id of the user
                                     String email = object.optString("email");
                                     String id = object.optString("id");
+                                    mTvInfo.setText("email :"+email+"\nid :"+id);
 
                                     if(BuildConfig.DEBUG){
-                                        Log.d("LoginFacebook","result :"+object.toString());
+                                        Log.d("LoginFacebook.thanh","result :"+object.toString());
+                                        Log.d("LoginFacebook.thanh","result email:"+response.getJSONObject().optString("email"));
                                     }
                                 }
                             }
-                            }).executeAsync();*/
+                            });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "last_name,first_name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
             @Override
             public void onCancel() {
@@ -83,7 +87,9 @@ public class Main extends AppCompatActivity {
             }
             @Override
             public void onError(FacebookException e) {
+
                 mTvInfo.setText("Login failed.");
+
             }
         });
     }

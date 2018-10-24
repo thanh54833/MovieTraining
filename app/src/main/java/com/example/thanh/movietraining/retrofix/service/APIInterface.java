@@ -4,7 +4,6 @@ package com.example.thanh.movietraining.retrofix.service;
 import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.model.MovieModel;
 import com.example.thanh.movietraining.model.RegisterModel;
-import com.example.thanh.movietraining.retrofix.model.Registers;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

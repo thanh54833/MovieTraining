@@ -5,9 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-
     <TableRow>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,8 +19,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:id="@+id/tv_title"
+            />
     </TableRow>
-
 </TableLayout>

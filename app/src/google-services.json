@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "712200824306",
+    "firebase_url": "https://be-khong-gay.firebaseio.com",
+    "project_id": "be-khong-gay",
+    "storage_bucket": "be-khong-gay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712200824306:android:37e931cccb947ca0",
+        "android_client_info": {
+          "package_name": "com.example.thanh.movietraining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712200824306-qencjs55k7tv7852628s0k2ut427gjdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkVakGt4zOrNAnfAoj4u9WI53Ex8skXjg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,7 +19,7 @@ import com.example.thanh.movietraining.view.ListMovieActivity;
 
 import java.util.ArrayList;
 
-public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClickListener {
+public class CustomListMovie extends ArrayAdapter<Movie> {
 
     private Context mContext;
     private Movie dataModel;
@@ -27,7 +27,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
     public static boolean isAnimation;
     private int lastPosition = -1;
 
-    // View lookup cache
+
     private static class ViewHolder {
         ImageView imageView;
         TextView txtMovie;
@@ -46,12 +46,6 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
     }
 
     @Override
-    public void onClick(View v) {
-        int position = (Integer) v.getTag();
-        Object object = getItem(position);
-        Movie dataModel = (Movie) object;
-    }
-    @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         dataModel = getItem(position);
         final View result;
@@ -67,7 +61,6 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
             viewHolder.btnlike = (Button) convertView.findViewById(R.id.btn_like);
             viewHolder.btnWatchMovie = (Button) convertView.findViewById(R.id.btn_watch_movie);
             viewHolder.txtLike = (TextView) convertView.findViewById(R.id.txt_like);
-
             result = convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -83,6 +76,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
         //new DownloadImageTask(viewHolder.imageView).execute(dataModel.getUrl());
         //load image pocasso ...
         new Picassos(viewHolder.imageView,mContext,dataModel.getUrl());
+
         viewHolder.txtMovie.setText(dataModel.getMovie());
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtView.setText(dataModel.getView());
@@ -94,14 +88,22 @@ public class CustomListMovie extends ArrayAdapter<Movie> implements View.OnClick
             viewHolder.btnlike.setBackgroundResource(R.drawable.ic_like_ba);
             viewHolder.txtLike.setText("Thích");
         }
+
         viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ListMovieActivity.ActionLike(position);
             }
         });
+
+       /* viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListMovieActivity.ActionWatch(position);
+            }
+        });*/
+
         return convertView;
     }
-
 
 }
