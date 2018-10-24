@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
 import com.example.thanh.movietraining.Sqlite.DBAcount;
+import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.model.RegisterModel;
 import com.example.thanh.movietraining.presenter.RegisterPersenter;
@@ -27,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
     private Button btn_register;
     private Button btn_sd;
     private Button btn_dm;
+    private Button btn_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +50,21 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
         btn_sd.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         btn_dm.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         btn_register=findViewById(R.id.btn_register);
+        btn_close=findViewById(R.id.btn_close);
+
         btn_register.setOnClickListener(this);
+        btn_close.setOnClickListener(this);
     }
 
     @Override
     public void getDataSuccess(RegisterModel registers) {
 
-
         DBAcount dbManager = new DBAcount(this);
-
         LoginModel.Data data=new LoginModel.Data(registers.getData().getId(),registers.getData().getBirthday(),registers.getData().getUpdated_at(),registers.getData().getEmail(),registers.getData().getCreated_at(),registers.getData().getGoogle_id(),registers.getData().getGender(),registers.getData().getFacebook_id(),registers.getData().getPassword(),registers.getData().getAccess_token(),registers.getData().getFull_name());
-
         LoginModel logins = new LoginModel(registers.getMessage(),registers.getError(),data,registers.getCode());
-
         dbManager.addAccount(logins);
-
         Intent intent=new Intent(this,WatchMovieActivity.class);
         startActivity(intent);
-
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, "Register success : true ", Toast.LENGTH_SHORT).show();
             Log.d("thanhthanh","result : Register success");
@@ -95,7 +95,24 @@ public class RegisterActivity extends AppCompatActivity  implements IRegisterVie
                     registerPersenter.onRegister(email, full_name,password,gender,birthday);
                 }
                 break;
-
+            case R.id.btn_close:
+                Intent intent=new Intent(this,ListMovieActivity.class);
+                startActivity(intent);
+                Utils.messageDisplay("back...");
+                break;
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+
+            Intent intent=new Intent(this,ListMovieActivity.class);
+            startActivity(intent);
+            Utils.messageDisplay("back...");
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

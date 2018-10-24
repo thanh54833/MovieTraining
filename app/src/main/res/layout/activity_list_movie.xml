@@ -6,15 +6,61 @@
     android:orientation="vertical"
     android:background="@drawable/bg"
     tools:context="com.example.thanh.movietraining.view.ListMovieActivity">
-    
-    <ListView
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:text="HFIML"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center|right"
+            android:layout_margin="15dp"
+            android:text="Đăng Xuất"
+            android:textColor="#fff"
+            android:textSize="14dp"
+            android:background="@drawable/bg_button_login2"
+            android:id="@+id/btn_logout"
+            />
+
+    </FrameLayout>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_view"
-        android:divider="#00000000"
-        android:dividerHeight="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        />
+        android:orientation="vertical"
+        >
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_view"
+            android:divider="#00000000"
+            android:dividerHeight="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:indeterminate="true"
+            android:layout_gravity="bottom"
+            android:id="@+id/pb_load"
+            />
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

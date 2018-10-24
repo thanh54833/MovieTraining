@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.library.Converter;
@@ -39,51 +42,37 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     private static ArrayList<Integer> integers;
     private Converter converter;
     private static Context context;
+    private Button btn_logout;
+    private ProgressBar pb_load;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_movie);
-
         //custom title bar ...
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
-        getSupportActionBar().getCustomView();
-
         init();
-
-        try {
-            Files.wirteFile(FILE_DATABASE, new Parses().getBuffer());
-        } catch (Exception e) {
-            Utils.messageDisplay("result :" + e.getMessage());
-        }
-
-        DBAcount dbManager = new DBAcount(this);
-        dbManager.deleteAccount();
-
 
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        recoderArrayLike();
+        //recoderArrayLike();
         if(BuildConfig.DEBUG){
             Utils.messageDisplay("on destroy...");
         }
-        Toast.makeText(getApplicationContext(),"on destroy..",Toast.LENGTH_SHORT).show();
+
     }
     @Override
     protected void onStop() {
         super.onStop();
-        recoderArrayLike();
+        //recoderArrayLike();
         if(BuildConfig.DEBUG){
             Utils.messageDisplay("on stop...");
         }
-        Toast.makeText(getApplicationContext(),"on stop..",Toast.LENGTH_SHORT).show();
+
     }
 
     public void recoderArrayLike() {
@@ -107,23 +96,49 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
         listView = findViewById(R.id.list_view);
         mainPresenter = new ListPresenter(this);
         mainPresenter.LoadListView(String.valueOf(PAGE), "10");
+        btn_logout=findViewById(R.id.btn_logout);
+        pb_load=findViewById(R.id.pb_load);
+
+
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 CustomListMovie.isAnimation = true;
                 if (!listView.canScrollVertically(1) && scrollState == SCROLL_STATE_IDLE && TOTAL_PAGE == 10) {
-                    recoderArrayLike();
+                    //recoderArrayLike();
                     PAGE = PAGE + 1;
                     mainPresenter.LoadListView(String.valueOf(PAGE), "10");
+                    pb_load.setVisibility(View.VISIBLE);
                 }
                 if (!listView.canScrollVertically(-1) && scrollState == SCROLL_STATE_IDLE && PAGE > 1) {
-                    recoderArrayLike();
+                    //recoderArrayLike();
                     PAGE = PAGE - 1;
                     mainPresenter.LoadListView(String.valueOf(PAGE), "10");
+                    pb_load.setVisibility(View.VISIBLE);
                 }
             }
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    Files.wirteFile(FILE_DATABASE, new Parses().getBuffer());
+                } catch (Exception e) {
+                    Utils.messageDisplay("result :" + e.getMessage());
+                }
+                DBAcount dbManager = new DBAcount(getApplicationContext());
+                dbManager.deleteAccount();
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
             }
         });
@@ -155,7 +170,9 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
         adapter.notifyDataSetChanged();
         //Toast.makeText(getApplicationContext(), "length :" + list.size(), Toast.LENGTH_SHORT).show();
     }
-    public static void ActionLike(int position) {
+    public void ActionLike(int position) {
+
+
         if (movies.get(position).isLike() == false) {
             movies.get(position).setLike(true);
             integers.add(Integer.valueOf(movies.get(position).getId()));
@@ -165,9 +182,15 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
         }
         CustomListMovie.isAnimation = false;
         adapter.notifyDataSetChanged();
+
+        //add arrary ...
+        recoderArrayLike();
+        if(BuildConfig.DEBUG){
+            Utils.messageDisplay("on destroy...");
+        }
+
+
     }
-
-
 
     @Override
     public void showLoading() {
@@ -175,11 +198,13 @@ public class ListMovieActivity extends AppCompatActivity implements IListMovieVi
     }
     @Override
     public void hideLoading() {
-
+        pb_load.setVisibility(View.GONE);
     }
     @Override
     public void showError() {
 
     }
-    //baby jaserick
+
+
+
 }

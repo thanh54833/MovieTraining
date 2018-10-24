@@ -78,7 +78,8 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-        if (isAnimation == true) {
+        //isAnimation == true
+        if (false) {
             Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
             result.startAnimation(animation);
             lastPosition = position;
@@ -110,12 +111,14 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
         viewHolder.btnlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListMovieActivity.ActionLike(position);
+                DBAcount dbManager = new DBAcount(getContext());
+                if (dbManager.getAccount() != null && !dbManager.getAccount().data.getEmail().equals("")) {
+                    new ListMovieActivity().ActionLike(position);
+                }
             }
         });
 
         //final DBAcount dbManager = new DBAcount(mContext);
-
         viewHolder.btnWatchMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,6 +127,7 @@ public class CustomListMovie extends ArrayAdapter<Movie> {
 
                 DBAcount dbManager = new DBAcount(getContext());
                 if (dbManager.getAccount() != null && !dbManager.getAccount().data.getEmail().equals("")) {
+
                     Utils.messageDisplay("result gmail :" + dbManager.getAccount().data.getEmail());
                     Intent i = new Intent(mContext, WatchMovieActivity.class);
                     mContext.startActivity(i);

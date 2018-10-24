@@ -120,6 +120,7 @@
             android:background="@drawable/btnclose"
             android:layout_gravity="center|top"
             android:layout_margin="20dp"
+            android:id="@+id/btn_close"
         />
 
         <LinearLayout
@@ -128,7 +129,7 @@
             android:layout_gravity="center|bottom"
             android:gravity="center|bottom"
             android:orientation="horizontal"
-            android:id="@+id/btn_close"
+
             >
 
             <TextView

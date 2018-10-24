@@ -70,8 +70,6 @@ public class ListPresenter implements IListPresenter {
                             Like = false;
                         }
 
-
-
                         if (title.indexOf("/") > 0) {
                             movie = title.substring(0, title.indexOf("/"));
                             name = title.substring(title.indexOf("/") + 1, title.length());
@@ -84,6 +82,7 @@ public class ListPresenter implements IListPresenter {
                         list.add(movieItem);
                     }
                     listMovie.displayMain(list);
+                    listMovie.hideLoading();
                 }
             }
             @Override

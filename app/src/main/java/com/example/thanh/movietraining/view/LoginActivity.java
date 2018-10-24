@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.thanh.movietraining.BuildConfig;
 import com.example.thanh.movietraining.R;
 import com.example.thanh.movietraining.Sqlite.DBAcount;
+import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.presenter.LoginPresenter;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     private TextView textViewLogin;
     private DBAcount dbManager;
     private Button btn_register;
+    private Button btn_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         btn_register = findViewById(R.id.btn_register);
         btn_register.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         textViewLogin = findViewById(R.id.tv_login);
+        btn_close=findViewById(R.id.btn_close);
+
         buttonLogin.setOnClickListener(this);
         buttonForgotPassword.setOnClickListener(this);
         editTextEmail.setOnKeyListener(this);
         editTextPassword.setOnKeyListener(this);
         btn_register.setOnClickListener(this);
+        btn_close.setOnClickListener(this);
 
         dbManager = new DBAcount(this);
 
@@ -86,20 +91,24 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
             case R.id.btn_login:
                 if (BuildConfig.DEBUG) {
                     Toast.makeText(this, "Click button Login ...", Toast.LENGTH_SHORT).show();
-
                     onLogin();
                 }
                 break;
             case R.id.btn_register:
-
                 Intent intent=new Intent(this,RegisterActivity.class);
                 startActivity(intent);
 
                 Toast.makeText(this, "Click button register ...", Toast.LENGTH_SHORT).show();
                 break;
 
-        }
+            case R.id.btn_close:
 
+                Intent intent2=new Intent(this,ListMovieActivity.class);
+                startActivity(intent2);
+                Utils.messageDisplay("back...");
+
+                break;
+        }
     }
 
     @Override
@@ -136,6 +145,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                                 onLogin();
                             }
                             break;
+
+
                     }
                     return true;
 
@@ -158,4 +169,20 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         imm.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(editTextPassword.getWindowToken(), 0);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+
+            Intent intent=new Intent(this,ListMovieActivity.class);
+            startActivity(intent);
+
+            Utils.messageDisplay("back...");
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
