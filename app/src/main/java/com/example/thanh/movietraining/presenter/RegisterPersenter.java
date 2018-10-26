@@ -7,6 +7,7 @@ import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.model.RegisterModel;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
+import com.example.thanh.movietraining.retrofix.service.APIManager;
 import com.example.thanh.movietraining.view.IRegisterView;
 
 import retrofit2.Call;
@@ -23,8 +24,8 @@ public class RegisterPersenter implements IRegisterPresenter{
     @Override
     public void onRegister(String email, String full_name, String password, String gender, String birthday) {
 
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        final Call<RegisterModel> call = apiInterface.onRegister(Utils.key_token, email,full_name,password,gender,birthday);
+        APIInterface apiInterface = APIManager.createService(APIInterface.class);
+        final Call<RegisterModel> call = apiInterface.onRegister(email,full_name,password,gender,birthday);
 
         call.enqueue(new Callback<RegisterModel>() {
             @Override

@@ -8,6 +8,7 @@ import com.example.thanh.movietraining.Utils;
 import com.example.thanh.movietraining.model.LoginModel;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
+import com.example.thanh.movietraining.retrofix.service.APIManager;
 import com.example.thanh.movietraining.view.ILoginView;
 
 import retrofit2.Call;
@@ -24,8 +25,10 @@ public class LoginPresenter implements ILoginPresenter{
     @Override
     public void onLogin(String email, String password) {
 
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        final Call<LoginModel> call = apiInterface.onLogin(Utils.key_token, email,password);
+        APIInterface apiInterface = APIManager.createService(APIInterface.class);
+
+        final Call<LoginModel> call = apiInterface.onLogin(email,password);
+
         call.enqueue(new Callback<LoginModel>() {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {

@@ -7,6 +7,7 @@ import com.example.thanh.movietraining.model.MovieModel;
 import com.example.thanh.movietraining.object.Movie;
 import com.example.thanh.movietraining.retrofix.service.APIClient;
 import com.example.thanh.movietraining.retrofix.service.APIInterface;
+import com.example.thanh.movietraining.retrofix.service.APIManager;
 import com.example.thanh.movietraining.view.IListMovieView;
 
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class ListPresenter implements IListPresenter {
     @Override
     public void LoadListView(String page, String per_page) {
 
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        final Call<MovieModel> call = apiInterface.onListView(Utils.key_token, page, per_page);
+        APIInterface apiInterface =APIManager.createService(APIInterface.class);
+        final Call<MovieModel> call = apiInterface.onListView(page, per_page);
 
         call.enqueue(new Callback<MovieModel>() {
             @Override
@@ -69,7 +70,6 @@ public class ListPresenter implements IListPresenter {
                         } else {
                             Like = false;
                         }
-
                         if (title.indexOf("/") > 0) {
                             movie = title.substring(0, title.indexOf("/"));
                             name = title.substring(title.indexOf("/") + 1, title.length());
@@ -77,7 +77,6 @@ public class ListPresenter implements IListPresenter {
                             movie = title;
                             name = title;
                         }
-
                         Movie movieItem = new Movie(movie.trim(), name.trim(), "Lượt xem : " + data.getViews(), data.getImage(), decription.trim(), Like, id,director,manufacturer,duration,actor,link,genres);
                         list.add(movieItem);
                     }

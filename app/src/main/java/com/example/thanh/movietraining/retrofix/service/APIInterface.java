@@ -17,17 +17,27 @@ import retrofit2.http.POST;
 
 public interface APIInterface {
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("/user/login")
     Call<LoginModel> onLogin(@Header("app_token") String authKey, @Field("email") String email, @Field("password") String password);//,@Body Datas data);
-
     @FormUrlEncoded
     @POST("/movie/list ")
     Call<MovieModel> onListView(@Header("app_token") String authKey, @Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
+    @FormUrlEncoded
+    @POST("/user/registry")
+    Call<RegisterModel> onRegister(@Header("app_token") String authKey, @Field("email") String email, @Field("full_name") String full_name, @Field("password") String password, @Field("gender") String gender, @Field("birthday ") String birthday);//,@Body Datas data);
+    */
+
+    @FormUrlEncoded
+    @POST("/user/login")
+    Call<LoginModel> onLogin(@Field("email") String email, @Field("password") String password);//,@Body Datas data);
+
+    @FormUrlEncoded
+    @POST("/movie/list ")
+    Call<MovieModel> onListView(@Field("page") String page, @Field("per_page") String per_page);//,@Body Datas data);
 
 
     @FormUrlEncoded
     @POST("/user/registry")
-    Call<RegisterModel> onRegister(@Header("app_token") String authKey, @Field("email") String email, @Field("full_name") String full_name, @Field("password") String password, @Field("gender") String gender, @Field("birthday ") String birthday);//,@Body Datas data);
-
+    Call<RegisterModel> onRegister(String email, @Field("full_name") String full_name, @Field("password") String password, @Field("gender") String gender, @Field("birthday ") String birthday);//,@Body Datas data);
 }
